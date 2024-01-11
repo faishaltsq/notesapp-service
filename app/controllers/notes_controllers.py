@@ -105,6 +105,19 @@ def transform(note):
 
     return data
 
+def changeArchiveStatus(id):
+    try :
+        note = Note.query.filter_by(id=id).first()
+        if not note:
+            return response.not_found_response([], 'note not found')
+
+        note.archived = not note.archived
+        db.session.commit()
+
+        return response.success_response(None, "success")
+    except Exception as e:
+        return response.bad_request_response([], str(e))
+
 def multiTransform(notes):
     data = []
     for i in notes:

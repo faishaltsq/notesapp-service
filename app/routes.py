@@ -6,6 +6,10 @@ from app.controllers import user_controllers , notes_controllers
 def index():
     return "this is api for Tugas Besar : Notes App"
 
+@app.route('/api/v1/users/login',methods=['POST'])
+def login():
+    return user_controllers.login(request)
+
 @app.route('/api/v1/users',methods=['GET','POST'])
 def user():
     if request.method != 'POST':
@@ -49,3 +53,7 @@ def noteById(id):
 @app.route('/api/v1/notes/all/<id>',methods=['GET'])
 def noteByUserId(id):
     return notes_controllers.showByUserId(id)
+
+@app.route('/api/v1/notes/archive/<id>',methods=['GET','PUT'])
+def changeArchiveStatus(id):
+    return notes_controllers.changeArchiveStatus(id)

@@ -79,7 +79,7 @@ def delete(id):
         return response.bad_request_response([], str(e))
     
 
-def login():
+def login(request):
     try:
         email = request.json['email']
         password = request.json['password']
